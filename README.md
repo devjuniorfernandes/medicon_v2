@@ -1,66 +1,68 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Medicon v2 🏥
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Medicon** é uma plataforma abrangente de gestão de saúde e consultas médicas, desenvolvida para ligar doentes a hospitais e médicos. O projeto é composto por uma aplicação web/backend robusta e uma aplicação móvel para acesso facilitado.
 
-## About Laravel
+## 🛠 Tecnologias Utilizadas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O projeto está dividido em duas componentes principais:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Backend e Painéis Web (Laravel)
+- **Framework:** Laravel 11.x (PHP 8.2)
+- **Frontend Web:** Blade, Tailwind CSS, Alpine.js, Vite
+- **Autenticação:** Laravel Breeze (para web) e Laravel Sanctum (para API Móvel)
+- **Base de Dados:** Migrations preparadas para bases relacionais (MySQL/SQLite/PostgreSQL) via Eloquent ORM.
+- **Outros:** `barryvdh/laravel-dompdf` para geração de relatórios e documentos médicos em PDF.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. Aplicação Móvel (Flutter)
+- **Framework:** Flutter (Dart SDK ^3.12.2)
+- **Gestão de Estado:** Provider
+- **Integrações:** Firebase Core & Cloud Messaging (FCM) para notificações push em tempo real.
+- **Funcionalidades Locais:** `shared_preferences` (cache local), `image_picker` (upload de fotos/avatares), `pdf` e `printing` (visualização e impressão de relatórios médicos).
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Estado do Projeto (Atualizado a 24 de Junho de 2026)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+O desenvolvimento tem avançado significativamente com foco na implementação do core de agendamentos e gestão hospitalar. 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Funcionalidades Implementadas (Backend & API)
+- [x] **Autenticação e Gestão de Utilizadores:** Registo, login e gestão de perfis com suporte a avatares customizados.
+- [x] **Gestão Hospitalar:** Operações CRUD de hospitais, suporte para galerias de imagens associadas e configuração de horários de funcionamento (`HospitalSchedules`).
+- [x] **Especialidades Médicas:** Categorização e associação de hospitais a diversas especialidades médicas (`Hospital_Specialty`).
+- [x] **Agendamento de Consultas (`Appointments`):** Sistema central robusto para marcar e gerir consultas entre pacientes e hospitais.
+- [x] **Processo Clínico (`Medical Records`):** Armazenamento seguro de histórico de consultas e dados vitais do paciente.
+- [x] **Sistema de Avaliações (`Reviews`):** Os pacientes podem deixar comentários e avaliações das consultas, com suporte para respostas oficiais por parte dos hospitais.
+- [x] **Notificações Push:** Integração estruturada com Firebase (FCM Tokens associados aos utilizadores) para alertas e lembretes de consultas.
+- [x] **Comunicação:** Sistema de envio de mensagens de contacto.
+- [x] **APIs REST:** Endpoints dedicados em `routes/api.php` concebidos para consumo pela aplicação móvel, utilizando Sanctum para autenticação stateless.
 
-## Laravel Sponsors
+### Aplicação Móvel (`custom_medicon`)
+- A estrutura base encontra-se configurada com as integrações principais (HTTP, Firebase, Provider).
+- Preparada para suporte multiplataforma nativo (Android, iOS).
+- Integra ferramentas para partilha (`share_plus`) e gestão de PDFs.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 📂 Estrutura do Repositório
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- `/app` - Contém a lógica de negócio do Backend (Models, e vários Controllers organizados como `Admin`, `Api`, `Hospital` - ex: `AppointmentController`, `HospitalController`, `ProfileController`).
+- `/custom_medicon` - Código fonte completo da aplicação móvel em Flutter (`/lib`, `pubspec.yaml`).
+- `/database/migrations` - Histórico de migrações da base de dados que estabelecem a estrutura de dados relacional do Medicon.
+- `/routes` - Definições das rotas da aplicação (`web.php` para os painéis de administração e frontend, `api.php` para uso da App móvel).
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 💻 Como Iniciar o Projeto Localmente
 
-## Code of Conduct
+### Backend (Laravel)
+1. Instalar as dependências do PHP: `composer install`
+2. Instalar as dependências do Node.js: `npm install`
+3. Copiar e configurar o `.env`: `cp .env.example .env` (e ajustar credenciais de BD)
+4. Gerar a chave da aplicação: `php artisan key:generate`
+5. Correr as migrações: `php artisan migrate`
+6. Iniciar os servidores de desenvolvimento: `composer dev` (comando pré-configurado que corre o PHP server, Vite, filas e logs em simultâneo).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Mobile App (Flutter)
+1. Navegar para a pasta da aplicação móvel: `cd custom_medicon`
+2. Obter as dependências do Dart: `flutter pub get`
+3. Executar o projeto num emulador ou dispositivo físico: `flutter run`
